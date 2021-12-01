@@ -71,13 +71,13 @@ body {
 .timer p {
     margin: 0em;
 }
-.minutes {
+/* .minutes {
    
 
 }
 .seconds {
 
-}
+} */
 
 .starter-button {
     text-transform: uppercase;
@@ -96,6 +96,7 @@ body {
 }
 .starter-button:hover {
 
+    color: green;
 }
 .edit-button {
     padding-bottom: 10%;
