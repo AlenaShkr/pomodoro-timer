@@ -1,9 +1,8 @@
 body {
-    margin: 3%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: rgb(166, 163, 179);
+    background-color: #2B2A30;
 }
 .wrapper {
     max-width: 1280px;
@@ -12,4 +11,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.timer-body {
+
 }
