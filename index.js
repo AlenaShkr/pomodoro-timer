@@ -9,20 +9,34 @@ class Timer {
   minutesValue = document.querySelector('.minutes-value');
   secondsValue = document.querySelector('.seconds-value'); 
 
+  showTime() {
+    this.minutes = Math.trunc(this.duration / 60);
+    this.seconds = this.duration % 60;
+    if(this.seconds === 0) {
+      this.seconds = '00';
+    }
+    if(this.minutes < 10) {
+      this.minutes = `0${this.minutes}`;
+    }
+    this.minutesValue.value = this.minutes;
+    this.secondsValue.value = this.seconds;
+  }
+
   start() {
     this.timerID = setInterval(() => {
     this.duration = this.duration - 1;
-    this.minutes = Math.trunc(this.duration / 60);
-    this.seconds = this.duration % 60;
-    this.minutesValue.value = this.minutes;
-    this.secondsValue.value = this.seconds;
-    console.log(this.minutes, this.seconds);
+    this.showTime();
+    if(this.duration <= 5) {
+      this.audio.play();
+    }
 }, 1000);
 }
 stop() {
   clearInterval(this.timerID);
-
+  this.duration = 900;
+  this.showTime();
 }
+
 edit() {
 
 }
