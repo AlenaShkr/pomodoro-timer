@@ -50,6 +50,10 @@ body {
     z-index: -1;
 }
 
+/* .ring .finished path{
+    fill: #910A0A;
+} */
+
 .timer {
     display: flex;
     flex-direction: row;
@@ -123,3 +127,11 @@ body {
     fill: #585858;
 }
 
+.edit-icon_checked {
+    display: none;
+}
+
+.edit-icon_checked path {
+    fill:green;
+}
+ 

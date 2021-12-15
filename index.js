@@ -4,7 +4,7 @@ class Timer {
         this.audio = new Audio('assets/timer-bell.mp3');
     }
 
-  minutes = 15;
+  minutes = 0;
   seconds = 0;
   minutesValue = document.querySelector('.minutes-value');
   secondsValue = document.querySelector('.seconds-value'); 
@@ -21,6 +21,14 @@ class Timer {
     this.minutesValue.value = this.minutes;
     this.secondsValue.value = this.seconds;
   }
+  
+  get timerDuration() {
+    return;
+  }
+
+  set timerDuration(newDuration) {
+    this.duration = newDuration[0] * 60 + newDuration[1];
+  }
 
   start() {
     this.timerID = setInterval(() => {
@@ -33,32 +41,51 @@ class Timer {
 }
 stop() {
   clearInterval(this.timerID);
-  this.duration = 900;
-  this.showTime();
 }
 
 edit() {
+  console.log('hi');
+  this.minutesValue.disabled = false;
+  this.secondsValue.disabled = false;
+  this.minutesValue.autofocus = true;
 
 }
 }
+
 window.onload = function load() {
-  const pomodoroTimer = new Timer();
 
   const startButton = document.querySelector('.starter-button');
+  const editButton = document.querySelector('.edit-button');
+  const editIcon = editButton.querySelector('.edit-icon');
+  const editIconChecked = editButton.querySelector('.edit-icon_checked');
   
+  const pomodoroTimer = new Timer();
+
   let ifStart = true;
-  startButton.addEventListener('click', () => {
+  let ifEdit = true;
+  
+  function handlerStart() {
     if (ifStart) {
       pomodoroTimer.start();
       ifStart = false;
       startButton.textContent = 'stop';
-      // minutesValue.value = minutes;
-      // secondsValue.value = seconds;
     } else {
       pomodoroTimer.stop();
       ifStart = true;
       startButton.textContent = 'start';
     }
-  });
-
+  }
+  
+  function handlerEdit() {
+    if(ifEdit) {
+      pomodoroTimer.edit();
+      editIcon.style = 'display: none';
+      editIconChecked.style.display = 'block';
+      ifEdit = false;
+    } else {
+      editIcon.style = 'display: block';
+      editIconChecked.style.display = 'none';
+      ifEdit = true;
+    }
+  }
 };
