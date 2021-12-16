@@ -12,8 +12,8 @@ class Timer {
   showTime() {
     this.minutes = Math.trunc(this.duration / 60);
     this.seconds = this.duration % 60;
-    if(this.seconds === 0) {
-      this.seconds = '00';
+    if(this.seconds < 10) {
+      this.seconds = `0${this.seconds}`;
     }
     if(this.minutes < 10) {
       this.minutes = `0${this.minutes}`;
@@ -37,6 +37,9 @@ class Timer {
     
     if(this.duration <= 5) {
       this.audio.play();
+    }
+    if(this.duration === -1) {
+      clearInterval(this.timerID);
     }
 }, 1000);
 }
