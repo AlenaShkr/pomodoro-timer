@@ -23,17 +23,18 @@ class Timer {
   }
   
   get timerDuration() {
-    return;
+    return this.duration;
   }
 
   set timerDuration(newDuration) {
-    this.duration = newDuration[0] * 60 + newDuration[1];
+    this.duration = newDuration;
   }
 
   start() {
     this.timerID = setInterval(() => {
-    this.duration = this.duration - 1;
-    this.showTime();
+      this.showTime();
+      this.duration = this.duration - 1;
+    
     if(this.duration <= 5) {
       this.audio.play();
     }
@@ -45,12 +46,9 @@ stop() {
 
 isEdit = false;
 edit() {
-  console.log('hi');
-  
   this.minutesValue.disabled = this.isEdit;
   this.secondsValue.disabled = this.isEdit;
   this.isEdit = !this.isEdit;
-
 }
 }
 
@@ -60,6 +58,9 @@ window.onload = function load() {
   const editButton = document.querySelector('.edit-button');
   const editIcon = editButton.querySelector('.edit-icon');
   const editIconChecked = editButton.querySelector('.edit-icon_checked');
+  const timerArea = document.querySelector('.timer');
+  const minutesValue = document.querySelector('.minutes-value');
+  const secondsValue = document.querySelector('.seconds-value');
   
   const pomodoroTimer = new Timer();
 
@@ -101,5 +102,10 @@ window.onload = function load() {
     startButton.disabled = !startButton.disabled;
     handlerEdit();
     isEditClicked = !isEditClicked;
+    timerArea.addEventListener('change', () => {
+      let newTime = parseInt(minutesValue.value, 10) * 60 + parseInt(secondsValue.value, 10);
+      pomodoroTimer.timerDuration = newTime;
+      pomodoroTimer.showTime();
+    })
   })  
 };

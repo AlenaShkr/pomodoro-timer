@@ -50,6 +50,10 @@ body {
     z-index: -1;
 }
 
+.ring-edit path {
+    fill: yellow;
+}
+
 /* .ring .finished path{
     fill: #910A0A;
 } */
