@@ -43,11 +43,13 @@ stop() {
   clearInterval(this.timerID);
 }
 
+isEdit = false;
 edit() {
   console.log('hi');
-  this.minutesValue.disabled = false;
-  this.secondsValue.disabled = false;
-  this.minutesValue.autofocus = true;
+  
+  this.minutesValue.disabled = this.isEdit;
+  this.secondsValue.disabled = this.isEdit;
+  this.isEdit = !this.isEdit;
 
 }
 }
@@ -78,14 +80,26 @@ window.onload = function load() {
   
   function handlerEdit() {
     if(ifEdit) {
-      pomodoroTimer.edit();
       editIcon.style = 'display: none';
       editIconChecked.style.display = 'block';
-      ifEdit = false;
     } else {
       editIcon.style = 'display: block';
       editIconChecked.style.display = 'none';
-      ifEdit = true;
     }
+    pomodoroTimer.edit();
+    ifEdit = !ifEdit;
   }
+  let isStartClicked = false;
+  startButton.addEventListener('click', () => {
+    editButton.disabled = !editButton.disabled;
+    handlerStart();
+    isStartClicked = !isStartClicked;
+
+  })
+  let isEditClicked = false;
+  editButton.addEventListener('click', () => {
+    startButton.disabled = !startButton.disabled;
+    handlerEdit();
+    isEditClicked = !isEditClicked;
+  })  
 };
