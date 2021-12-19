@@ -31,17 +31,21 @@ class Timer {
   }
 
   start() {
-    this.timerID = setInterval(() => {
-      this.showTime();
-      this.duration = this.duration - 1;
+
+    if(this.duration > 0) {
+      this.timerID = setInterval(() => {
+        this.showTime();
+        this.duration = this.duration - 1;
+      
+      if(this.duration <= 5) {
+        this.audio.play();
+      }
+      if(this.duration === -1) {
+        clearInterval(this.timerID);
+      }
+      }, 1000);    
+    } else this.stop();
     
-    if(this.duration <= 5) {
-      this.audio.play();
-    }
-    if(this.duration === -1) {
-      clearInterval(this.timerID);
-    }
-}, 1000);
 }
 stop() {
   clearInterval(this.timerID);
